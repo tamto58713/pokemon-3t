@@ -19,8 +19,10 @@ block case
                     .dropdown-divider
                     a.dropdown-item(href='#') Change Password
             button.btn.btn-primary.d-block(style="width: 100%; margin-top: 2px") Setting
-            form(action="/logout", method="post")
-                button.btn.btn-primary.d-block(style="width: 100%; margin-top: 2px") Logout
+            
+            if currentUser.name.length > 0
+                form(action="/logout", method="post")
+                    button.btn.btn-primary.d-block(style="width: 100%; margin-top: 2px") Logout
 
         .list-pokedex.col-md-10.col-sm-12.row
             each pokemon in listPokemon
