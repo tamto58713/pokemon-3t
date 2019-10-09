@@ -1,6 +1,7 @@
 const express = require('express')
 const bodyParser = require("body-parser")
 const shortid = require('shortid')
+const favicon = require('express-favicon')
 
 const app = express()
 
@@ -19,7 +20,9 @@ const formatUrl = (num) => {
 app.set("view engine", "pug")
 app.set("views", "views")
 app.use(express.static('public'))
+app.use(favicon(__dirname + '/public/images/favicon.png'))
 app.use(bodyParser())
+
 let listPokemon = []
 let currentUser = {name: ""}
 for (let i = 0; i < 809; i++) {
@@ -32,7 +35,7 @@ for (let i = 0; i < 809; i++) {
 
 
 app.get("/", (req, res) => {
-    res.render("", { listPokemon, formatUrl, currentUser })
+    res.render("", { listPokemon, formatUrl, currentUser, title: "Pokedex" })
 })
 
 app.get("/pokemon/:id", (req, res) => {
@@ -40,7 +43,7 @@ app.get("/pokemon/:id", (req, res) => {
     let pokemon = listPokemon.filter(pokemon => {
         return pokemon.id == id
     })[0]
-    res.render("pokedex/detail", { pokemon })
+    res.render("pokedex/detail", { pokemon, title: "Pokemon" })
 })
 
 let errs = []
@@ -49,7 +52,7 @@ app.get("/login", (req, res) => {
         res.redirect("/")
         return
     }
-    res.render("auth/login", {errs: [], user: {userName: "", password: ""}})
+    res.render("auth/login", {errs: [], user: {userName: "", password: ""}, title: "Login"})
 })
 
 app.post("/login", (req, res) => {
@@ -80,7 +83,7 @@ app.get("/register", (req, res) => {
         res.redirect("/")
         return
     }
-    res.render("auth/register", {user: {name: "", userName: "", email: "", password: "", rePassword: ""}, errsReg})
+    res.render("auth/register", {user: {name: "", userName: "", email: "", password: "", rePassword: ""}, errsReg, title: "Register"})
 })
 
 const check = (name, userName, email, password, rePassword) => {
