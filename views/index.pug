@@ -3,6 +3,11 @@ block case
     .container-fluid.row.mt-4
         .user= User
         .side-bar.col-md-2.col-sm-12.mb-5(style="background: #ddd; padding-top: 5px;")
+                .btn-group.w-100
+                    .btn.btn-success.mr-1
+                        a(href="/register").text-light Register
+                    .btn.btn-success 
+                        a(href="/login").text-light Login
                 button.btn.btn-primary.d-block(style="width: 100%; margin-top: 2px") Home
                 .btn-group(style="width: 100%; margin-top: 2px")
                     button.btn.btn-primary.dropdown-toggle(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')

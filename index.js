@@ -1,10 +1,12 @@
 const express = require('express')
-const fetch = require("node-fetch")
+const bodyParser = require("body-parser")
+const shortid = require('shortid')
+
 const app = express()
 
 const port = process.env.PORT || 8080
-let pokemon = require("./pokemon").pokemon
-
+const pokemon = require("./pokemon").pokemon
+const db = require("./db")
 
 const formatUrl = (num) => {
     if (num >= 100)
@@ -17,7 +19,7 @@ const formatUrl = (num) => {
 app.set("view engine", "pug")
 app.set("views", "views")
 app.use(express.static('public'))
-
+app.use(bodyParser())
 let listPokemon = []
 for (let i = 0; i < 809; i++) {
     let poke = {
@@ -48,11 +50,87 @@ app.get("/pokemon/:id", (req, res) => {
     res.render("pokedex/detail", { pokemon })
 })
 
+let errs = []
 app.get("/login", (req, res) => {
-    res.render("auth/login")
+    res.render("auth/login", {errs: [], user: {userName: "", password: ""}})
 })
 
+app.post("/login", (req, res) => {
+    const userName = req.body.userName.toLocaleLowerCase()
+    const password = req.body.password 
+    const db = require("./db")
+    const user = db.get("users").find({userName}).value()
+    if (!user) {
+        errs.push("Username isn't exist!");
+        res.render('auth/login', {errs, user: {name: "", passwod: ""}})
+        return;
+    }
+
+    if (userName !== user.userName || password !== user.password) {
+        errs.push("Wrong UserName or Password");
+        res.render('auth/login', {errs, user: {userName, password}})
+        return;
+    }
+})
+
+let errsReg = [false, false, false, false, false]
 app.get("/register", (req, res) => {
-        res.render("auth/register")
+        res.render("auth/register", {user: {name: "", userName: "", email: "", password: "", rePassword: ""}, errsReg})
+})
+
+app.post("/register", (req, res, next) => {
+    const db = require("./db")
+    const name = req.body.name
+    const userName = req.body.userName
+    const email = req.body.email
+    const password = req.body.password
+    const rePassword = req.body.rePassword
+
+    if (name.trim().length === 0)
+        errsReg[0] = true
+    else
+        errsReg[0] = false
+    let user = db.get("users").find({userName}).value()
+    if (user)
+        errsReg[1] = true
+    else
+        errsReg[1] = false
+
+    user = db.get("users").find({email}).value()
+
+    if (user)
+        errsReg[2] = true
+    else
+        errsReg[2] = false
+
+    if (password.length < 8)
+        errsReg[3] = true
+    else if (rePassword !== password) {
+        errsReg[3] = false
+        errsReg[4] = true
+    }
+
+    else {
+        errsReg[3] = false
+        errsReg[4] = false
+    }
+
+    if (errsReg[0] || errsReg[1] || errsReg[2] || errsReg[3] || errsReg[4]) {
+        res.render("auth/register", {user: {name, userName, email, password: "", rePassword: ""}, errsReg})
+        return
+    }
+    
+    user = {
+        id: shortid.generate(),
+        firstName: name.slice(0, name.indexOf(" ")),
+        lastName: name.slice(name.indexOf(" "), name.length),
+        fullName: name,
+        userName,
+        email,
+        password
+    }
+    db.get("users").push(user).write()
+
+    res.redirect("/")
 })
 app.listen(port, () => console.log(`App listening on port ${port}`))

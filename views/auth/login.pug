@@ -2,11 +2,13 @@ extends ../common/index
 block case
     .register.container.mt-5
         h1.title.text-primary.text-center.font-weight-bold Login
-        form(action="/register" method="POST" style="margin: 0 auto").bg-light.p-5.w-50
+        form(action="/login" method="POST" style="margin: 0 auto").bg-light.p-5.w-50
             .form-group
                 label.font-weight-bold UserName
-                input.form-control(type="text" name="userName")
+                input.form-control(type="text" name="userName" value= user.userName)
             .form-group
                 label.font-weight-bold Password
-                input.form-control(type="password" name="password")
+                input.form-control(type="password" name="password" value= user.password)
+            if errs.length > 0
+                .alert.alert-danger.alert-sm= errs[0]
             button.btn.btn-primary Login

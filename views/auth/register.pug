@@ -5,17 +5,27 @@ block case
         form(action="/register" method="POST" style="margin: 0 auto").bg-light.p-5.w-50
             .form-group 
                 label.font-weight-bold Your Name
-                input.form-control(type="text" name)
+                input.form-control(type="text" name="name" value= user.name)
+                if errsReg[0]
+                    .alert.alert-danger.alert-sm Name is Required
             .form-group
                 label.font-weight-bold UserName
-                input.form-control(type="text" name="userName")
+                input.form-control(type="text" name="userName" value= user.userName)
+                if errsReg[1]
+                    .alert.alert-danger.alert-sm UserName existed
             .form-group
                 label.font-weight-bold Email
-                input.form-control(type="text" name="email")
+                input.form-control(type="text" name="email" value= user.email)
+                if errsReg[2]
+                    .alert.alert-danger.alert-sm Email existed
             .form-group
                 label.font-weight-bold Password
-                input.form-control(type="password" name="password")
+                input.form-control(type="password" name="password" value= user.password)
+                if errsReg[3]
+                    .alert.alert-danger.alert-sm Password has than 8 letters
             .form-group
                 label.font-weight-bold Re-Password
-                input.form-control(type="password" name="rePassword")
+                input.form-control(type="password" name="rePassword" value= user.rePassword)
+                if errsReg[4]  
+                    .alert.alert-danger.alert-sm Password not Matched
             button.btn.btn-primary Register
