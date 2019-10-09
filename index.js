@@ -3,7 +3,7 @@ const fetch = require("node-fetch")
 const app = express()
 
 const port = process.env.PORT || 8080
-let pokemon = require("./db").pokemon
+let pokemon = require("./pokemon").pokemon
 
 
 const formatUrl = (num) => {
@@ -40,7 +40,7 @@ app.get("/", (req, res) => {
 
 })
 
-app.get("/:id", (req, res) => {
+app.get("/pokemon/:id", (req, res) => {
     const id = req.params.id
     let pokemon = listPokemon.filter(pokemon => {
         return pokemon.id == id
@@ -48,4 +48,11 @@ app.get("/:id", (req, res) => {
     res.render("pokedex/detail", { pokemon })
 })
 
+app.get("/login", (req, res) => {
+    res.render("auth/login")
+})
+
+app.get("/register", (req, res) => {
+        res.render("auth/register")
+})
 app.listen(port, () => console.log(`App listening on port ${port}`))

@@ -1,6 +1,7 @@
 extends ./common/index
 block case
     .container-fluid.row.mt-4
+        .user= User
         .side-bar.col-md-2.col-sm-12.mb-5(style="background: #ddd; padding-top: 5px;")
                 button.btn.btn-primary.d-block(style="width: 100%; margin-top: 2px") Home
                 .btn-group(style="width: 100%; margin-top: 2px")
@@ -16,7 +17,7 @@ block case
         .list-pokedex.col-md-10.col-sm-12.row
             each pokemon in listPokemon
                 .card(style='width: 18rem;').col-lg-3.col-md-4.col-sm-6.col-12
-                    a(href= "/" + pokemon.id)
+                    a(href= "/pokemon/" + pokemon.id)
                         img.card-img-top(src= pokemon.imageUrl alt='...')
                     .card-body(style="padding: 5px")
                         p(style="color: #aaa; font-weight: bold").mb-2= "#" + formatUrl(pokemon.id)
