@@ -1,0 +1,14 @@
+extends ./common/index
+block case
+    .container-fluid.row.mt-4
+        .side-bar.col-md-2.col-sm-12
+        .list-pokedex.col-md-10.col-sm-12.row
+            each pokemon in listPokemon
+                .card(style='width: 18rem;').col-lg-3.col-md-4.col-sm-6.col-12
+                    img.card-img-top(src= pokemon.imageUrl alt='...')
+                    .card-body(style="padding: 5px")
+                        p(style="color: #aaa; font-weight: bold").mb-2= "#" + formatUrl(pokemon.id)
+                        h5.card-title.font-weight-bold.mb-1= pokemon.name.english
+                        .type(class= pokemon.type[0])= pokemon.type[0]
+                        if pokemon.type[1]
+                            .type(class= pokemon.type[1]).ml-1= pokemon.type[1]

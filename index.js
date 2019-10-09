@@ -3,27 +3,32 @@ const fetch = require("node-fetch")
 const app = express()
 
 const port = process.env.PORT || 8080
-let listPokemon = [""]
+let pokemon = require("./db").pokemon
 
-const Pokedex = require('pokedex')
-const pokedex = new Pokedex()
 
 const formatUrl = (num) => {
-    if (num > 100)
+    if (num >= 100)
         return num.toString()
-    if (num > 10)
+    if (num >= 10)
         return "0" + num
     return "00" + num
 }
+
+app.set("view engine", "pug")
+app.set("views", "views")
+app.use(express.static('public'))
+
+
 app.get("/", (req, res) => {
-        for (let i = 1; i <= 807; i++) {
-            let pokemon = {
-                ...pokedex.pokemon(i), 
-                imageURL: "https://assets.pokemon.com/assets/cms2/img/pokedex/full/" + formatUrl(i) + ".png"
-            }
-            listPokemon.push(pokemon)
+    let listPokemon = []
+    for (let i = 0; i < 809; i++) {
+        let poke = {
+            ...pokemon[i],
+            imageUrl: "https://assets.pokemon.com/assets/cms2/img/pokedex/full/" + formatUrl(i + 1) + ".png"
         }
-    res.send("ihi")
+        listPokemon.push(poke)
+    }
+    res.render("", { listPokemon, formatUrl: formatUrl })
 
 })
 
