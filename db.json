@@ -8,24 +8,6 @@
       "email": "tamtotran5667@gmail.com",
       "userName": "tamto58713",
       "password": "abcd1234"
-    },
-    {
-      "id": "orOlCUBc",
-      "firstName": "Doc",
-      "lastName": " Co Cau Bai",
-      "fullName": "Doc Co Cau Bai",
-      "userName": "docco",
-      "email": "doccocaubai@gmail.com",
-      "password": "12344321"
-    },
-    {
-      "id": "pkI6N-js",
-      "firstName": "Doc",
-      "lastName": " Co Cuu Kiem",
-      "fullName": "Doc Co Cuu Kiem",
-      "userName": "docco123",
-      "email": "doccocaubai123@gmail.com",
-      "password": "12344321"
     }
-  ]
+]
 }
