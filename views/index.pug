@@ -1,7 +1,18 @@
 extends ./common/index
 block case
     .container-fluid.row.mt-4
-        .side-bar.col-md-2.col-sm-12
+        .side-bar.col-md-2.col-sm-12.mb-5(style="background: #ddd; padding-top: 5px;")
+                button.btn.btn-primary.d-block(style="width: 100%; margin-top: 2px") Home
+                .btn-group(style="width: 100%; margin-top: 2px")
+                    button.btn.btn-primary.dropdown-toggle(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+                        |Profile
+                    .dropdown-menu
+                        a.dropdown-item(href='#') Change Infomation
+                        .dropdown-divider
+                        a.dropdown-item(href='#') Change Password
+                button.btn.btn-primary.d-block(style="width: 100%; margin-top: 2px") Setting
+                button.btn.btn-primary.d-block(style="width: 100%; margin-top: 2px") Logout
+
         .list-pokedex.col-md-10.col-sm-12.row
             each pokemon in listPokemon
                 .card(style='width: 18rem;').col-lg-3.col-md-4.col-sm-6.col-12

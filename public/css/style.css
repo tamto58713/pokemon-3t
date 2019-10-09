@@ -1,16 +1,24 @@
 .banner {
     padding: 0;
     width: 100%;
+    display: block;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background: #fff;
+    width: 100vw;
 }
 
 .banner img {
     display: block;
     margin: 0 auto;
+    height: 80px;
 }
 
 @media only screen and (max-width: 576px) {
     .banner img {
-        width: 100%;
+        width: 218.57px;
+        height: 80px;
     }
   }
 
@@ -21,8 +29,23 @@
 
 .container-fluid .list-pokedex {
     margin: 0 auto;
+    overflow: scroll;
+    height: 82vh;
+
 }
 
+
+::-webkit-scrollbar-track {
+    visibility: hidden;
+}
+::-webkit-scrollbar {
+    visibility: hidden;
+}   
+
+::-webkit-scrollbar-thumb {
+    visibility: hidden;
+
+}
 .container-fluid .list-pokedex .card {
     border: none;
 }
@@ -52,4 +75,24 @@
     border-radius: 4px;
     text-align: center;
     font-size: .8em;
+}
+
+.side-bar ul {
+    list-style: none;
+}
+ul li {
+    cursor: pointer;
+    font-size: 1.5em;
+}
+ul li li {
+    display: none;
+    font-size: .7em;
+}
+
+ul li:hover li {
+    display: block;
+}
+
+ul li li:hover  {
+    box-shadow: 0px 5px 3px 3px #123
 }
