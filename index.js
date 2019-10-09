@@ -20,7 +20,7 @@ const formatUrl = (num) => {
 app.set("view engine", "pug")
 app.set("views", "views")
 app.use(express.static('public'))
-app.use(favicon(__dirname + '/public/images/favicon.png'))
+app.use(favicon(__dirname + '/public/images/favicon.ico'))
 app.use(bodyParser())
 
 let listPokemon = []
