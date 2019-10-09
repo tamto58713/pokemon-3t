@@ -1,0 +1,32 @@
+extends ../common/index 
+block case
+    button.btn.btn-success.btn-sm
+        a(href="/") Back
+    .detail-pokemon.row
+        .image-pokemon.col-md-4.offset-md-2
+            img(src= pokemon.imageUrl)
+        .detail-info.col-md-4
+            .info-description Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.
+            .info-base.row.mt-5.p-2
+                .left.col-md-5
+                    .height
+                        .title HP
+                        .info= pokemon.base.HP
+                    .weight
+                        .title Actack
+                        .info= pokemon.base.Attack
+                    .gender
+                        .title Defense
+                        .info= pokemon.base.Defense
+                .left.col-md-5.offset-md-2
+                    .category
+                        .title Speed
+                        .info= pokemon.base.Speed
+                    .abilities
+                        .title Abilities 
+                        .info -
+            .type-info.mt-3
+                .title.mb-2 Type
+                .type(class= pokemon.type[0])= pokemon.type[0]
+                if pokemon.type[1]
+                    .type(class= pokemon.type[1]).ml-1= pokemon.type[1]

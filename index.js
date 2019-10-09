@@ -18,9 +18,17 @@ app.set("view engine", "pug")
 app.set("views", "views")
 app.use(express.static('public'))
 
+let listPokemon = []
+for (let i = 0; i < 809; i++) {
+    let poke = {
+        ...pokemon[i],
+        imageUrl: "https://assets.pokemon.com/assets/cms2/img/pokedex/full/" + formatUrl(i + 1) + ".png"
+    }
+    listPokemon.push(poke)
+}
+
 
 app.get("/", (req, res) => {
-    let listPokemon = []
     for (let i = 0; i < 809; i++) {
         let poke = {
             ...pokemon[i],
@@ -30,6 +38,14 @@ app.get("/", (req, res) => {
     }
     res.render("", { listPokemon, formatUrl: formatUrl })
 
+})
+
+app.get("/:id", (req, res) => {
+    const id = req.params.id
+    let pokemon = listPokemon.filter(pokemon => {
+        return pokemon.id == id
+    })[0]
+    res.render("pokedex/detail", { pokemon })
 })
 
 app.listen(port, () => console.log(`App listening on port ${port}`))

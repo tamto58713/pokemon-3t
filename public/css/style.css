@@ -96,3 +96,38 @@ ul li:hover li {
 ul li li:hover  {
     box-shadow: 0px 5px 3px 3px #123
 }
+
+.image-pokemon {
+    padding: 20px;
+}
+
+.image-pokemon img {
+    background: #ddd;
+    border-radius: 8px;
+    width: 90%;
+}
+
+.detail-info {
+    padding: 20px;
+    font-family: 'Grenze', serif;
+    font-size: 1.2em;
+}
+
+.info-base {
+    background: #30a7d7;
+    border-radius: 10px;
+}
+
+.info-base .title {
+    font-family: 'Inconsolata', monospace;
+    color: #fff;
+}
+
+.type {
+    width: 30%;
+    display: inline-block;
+    color: #fff;
+    border-radius: 4px;
+    text-align: center;
+    font-size: 1em;
+}
