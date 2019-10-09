@@ -54,8 +54,11 @@ app.get("/login", (req, res) => {
 
 app.post("/login", (req, res) => {
     const userName = req.body.userName.toLocaleLowerCase()
+
     const password = req.body.password
+    
     const user = db.get("users").find({userName}).value()
+    
     if (!user) {
         errs.push("Username isn't exist!");
         res.render('auth/login', {errs, user: {name: "", passwod: ""}})
